@@ -54,6 +54,5 @@ model Bet {
 
   amount      Float
   finalAmount Float
-  startAt     DateTime
   finishedAt  DateTime?
 }

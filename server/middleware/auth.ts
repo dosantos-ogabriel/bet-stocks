@@ -9,6 +9,7 @@ export default defineEventHandler(async (event) => {
   if (token) {
     try {
       const user = await verifyToken(token);
+      delete user.exp;
       event.context.user = user;
       return;
     } catch (error) {

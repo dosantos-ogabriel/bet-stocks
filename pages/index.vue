@@ -1,5 +1,5 @@
 <script></script>
 
 <template>
-  <div>apostas</div>
+  <div>resumo</div>
 </template>

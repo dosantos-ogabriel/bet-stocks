@@ -2,9 +2,14 @@
 const { logout } = useAuthStore();
 const links = [
   {
+    label: "Resumo",
+    icon: "i-heroicons-arrow-trending-up",
+    to: "/",
+  },
+  {
     label: "Apostas",
     icon: "i-heroicons-banknotes",
-    to: "",
+    to: "/apostas",
   },
 ];
 

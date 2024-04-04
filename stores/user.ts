@@ -5,7 +5,7 @@ export const useUserStore = defineStore("user", {
 
   actions: {
     async getUser() {
-      const user = await $fetch("/api/user");
+      const user = await $api("/api/user");
       return user;
     },
   },

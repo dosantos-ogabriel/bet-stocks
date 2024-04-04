@@ -1,4 +1,7 @@
+import { handleApiErrors } from "~/composables/error-handling";
+
 export default defineEventHandler((e) => {
-  // return e.context.user;
-  return createError({ statusCode: 401, message: "Authorization error" });
+  handleApiErrors(e);
+
+  return e.context.user;
 });

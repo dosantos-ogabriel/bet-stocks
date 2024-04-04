@@ -1,4 +1,8 @@
-<script></script>
+<script lang="ts" setup>
+const { getUser } = useUserStore();
+
+onBeforeMount(getUser);
+</script>
 
 <template>
   <div class="default-layout min-h-[100vh] dark:bg-[#010d00]">

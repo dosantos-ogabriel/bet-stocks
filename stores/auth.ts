@@ -23,7 +23,7 @@ export const useAuthStore = defineStore("auth", {
     },
     setAuthentication(value: boolean) {
       const logged = useCookie("logged");
-      logged.value = value ? "logged" : null;
+      logged.value = value ? "true" : null;
     },
   },
 });

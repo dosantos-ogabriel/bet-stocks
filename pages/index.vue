@@ -1,5 +1,5 @@
 <script></script>
 
 <template>
-  <div>sapo</div>
+  <div>apostas</div>
 </template>

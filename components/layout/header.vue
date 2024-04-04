@@ -1,29 +1,22 @@
 <script setup lang="ts">
 const { logout } = useAuthStore();
 const links = [
-  [
-    {
-      label: "Início",
-      icon: "i-heroicons-home",
-      to: "/",
-    },
-    {
-      label: "Apostas",
-      icon: "i-heroicons-banknotes",
-      to: "/apostas",
-    },
+  {
+    label: "Apostas",
+    icon: "i-heroicons-banknotes",
+    to: "/",
+  },
+];
 
-    // {
-    //   label: "Relatórios",
-    //   icon: "material-symbols:assignment-outline",
-    // },
-  ],
+const dropdownItems = [
   [
     {
       icon: "i-heroicons-cog-6-tooth",
+      label: "Configurações",
     },
     {
       icon: "i-heroicons-arrow-right-start-on-rectangle",
+      label: "Logout",
       click: logout,
     },
   ],
@@ -32,8 +25,12 @@ const links = [
 
 <template>
   <header>
-    <u-container>
+    <u-container class="flex justify-between align-bottom">
       <u-horizontal-navigation :links="links" />
+
+      <u-dropdown :items="dropdownItems" class="mt-2">
+        <u-avatar icon="i-heroicons-user" />
+      </u-dropdown>
     </u-container>
     <u-divider />
   </header>

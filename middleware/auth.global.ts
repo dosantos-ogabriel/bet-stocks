@@ -1,3 +1,3 @@
-export default defineNuxtRouteMiddleware((to, from) => {
-  console.log(to);
+export default defineNuxtRouteMiddleware((to) => {
+  if (!(to.name == "login")) console.log("Rota interna");
 });

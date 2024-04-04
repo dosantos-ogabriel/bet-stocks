@@ -16,7 +16,7 @@ const activeTab = ref<"login" | "register">("login");
         v-if="activeTab == 'login'"
         class="w-[70%] p-4 rounded-sm shadow-sm bg-gray-100 dark:bg-gray-800"
       >
-        <div class="text-center text-xl">Acessar sua conta</div>
+        <div class="text-center text-xl mb-4">Acessar sua conta</div>
         <auth-login />
         <div class="flex justify-end mt-4">
           <u-button
@@ -35,7 +35,7 @@ const activeTab = ref<"login" | "register">("login");
         v-if="activeTab == 'register'"
         class="w-[70%] p-4 rounded-sm shadow-sm bg-gray-100 dark:bg-gray-800"
       >
-        <div class="text-center text-xl">Registrar conta</div>
+        <div class="text-center text-xl mb-4">Registrar conta</div>
         <auth-register />
         <div class="flex justify-end mt-4">
           <u-button

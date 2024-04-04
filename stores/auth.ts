@@ -1,24 +1,29 @@
 import { type LoginInput, type RegisterInput } from "~/server/src/user";
 
 export const useAuthStore = defineStore("auth", {
-  state: () => ({
-    authenticated: false,
-  }),
-
   actions: {
     async login(data: LoginInput) {
-      const userData = await $fetch("/api/auth/login", { method: "post", body: data });
+      await $fetch("/api/auth/login", { method: "post", body: data });
 
-      return userData;
+      this.setAuthentication(true);
+      return navigateTo("");
     },
-
     async register(data: RegisterInput) {
-      const userData = await $fetch("/api/auth/register", {
+      await $fetch("/api/auth/register", {
         method: "post",
         body: data,
       });
 
-      return userData;
+      this.setAuthentication(true);
+      return navigateTo("");
+    },
+    logout() {
+      this.setAuthentication(false);
+      navigateTo("/login");
+    },
+    setAuthentication(value: boolean) {
+      const logged = useCookie("logged");
+      logged.value = value ? "logged" : null;
     },
   },
 });

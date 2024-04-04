@@ -4,7 +4,7 @@ const links = [
   {
     label: "Apostas",
     icon: "i-heroicons-banknotes",
-    to: "/",
+    to: "",
   },
 ];
 

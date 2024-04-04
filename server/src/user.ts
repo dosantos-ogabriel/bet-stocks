@@ -1,4 +1,5 @@
 import { Prisma } from "@prisma/client";
+import { generateToken } from "~/composables/useAuthentication";
 import bcrypt from "~/utils/bcrypt";
 import prisma from "./db";
 
@@ -17,7 +18,8 @@ class User {
 
     const user = await prisma.user.create({ data });
 
-    return user;
+    const token = await generateToken(user.id);
+    return { token };
   }
   async login(data: LoginInput) {
     const user = await prisma.user.findUnique({
@@ -28,7 +30,10 @@ class User {
 
     const isCorrectPassword = await bcrypt.compare(data.password, user.password);
 
-    if (isCorrectPassword) return user;
+    if (isCorrectPassword) {
+      const token = await generateToken(user.id);
+      return { token };
+    }
 
     throw createError({ statusCode: 400, statusMessage: "Usuário não encontrado" });
   }

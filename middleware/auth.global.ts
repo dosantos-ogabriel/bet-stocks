@@ -1,13 +1,17 @@
-export default defineNuxtRouteMiddleware((to) => {
-  const logged = useCookie("logged");
-  const { setAuthentication } = useAuthStore();
+export default defineNuxtRouteMiddleware(async (to) => {
+  const token = useCookie("token");
+  const { logout } = useAuthStore();
 
-  if (to.name !== "login" && !logged.value) {
-    abortNavigation();
-    setAuthentication(false);
-    return navigateTo("/login");
-  } else if (to.name == "login" && logged.value) {
-    abortNavigation();
-    return navigateTo("");
+  if (!token.value) {
+    if (to.name !== "login") {
+      abortNavigation();
+      logout();
+      return navigateTo("/login");
+    }
+  } else {
+    if (to.name == "login") {
+      abortNavigation();
+      return navigateTo("");
+    }
   }
 });

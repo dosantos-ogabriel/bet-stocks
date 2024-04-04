@@ -1,5 +1,5 @@
 import { Prisma } from "@prisma/client";
-import { generateToken } from "~/composables/useAuthentication";
+import { generateToken } from "~/composables/jwt";
 import bcrypt from "~/utils/bcrypt";
 import prisma from "./db";
 
@@ -18,7 +18,7 @@ class User {
 
     const user = await prisma.user.create({ data });
 
-    const token = await generateToken(user.id);
+    const token = await generateToken(user);
     return { token };
   }
   async login(data: LoginInput) {
@@ -26,16 +26,16 @@ class User {
       where: { email: data.email },
     });
     if (!user)
-      throw createError({ statusCode: 400, statusMessage: "Usuário não encontrado" });
+      throw createError({ statusCode: 400, message: "Usuário não encontrado" });
 
     const isCorrectPassword = await bcrypt.compare(data.password, user.password);
 
     if (isCorrectPassword) {
-      const token = await generateToken(user.id);
+      const token = await generateToken(user);
       return { token };
     }
 
-    throw createError({ statusCode: 400, statusMessage: "Usuário não encontrado" });
+    throw createError({ statusCode: 400, message: "Usuário não encontrado" });
   }
 }
 

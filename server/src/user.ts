@@ -20,15 +20,17 @@ class User {
     return user;
   }
   async login(data: LoginInput) {
-    const user = await prisma.user.findUniqueOrThrow({
+    const user = await prisma.user.findUnique({
       where: { email: data.email },
     });
+    if (!user)
+      throw createError({ statusCode: 400, statusMessage: "Usuário não encontrado" });
 
     const isCorrectPassword = await bcrypt.compare(data.password, user.password);
 
     if (isCorrectPassword) return user;
 
-    throw "Senha incorreta";
+    throw createError({ statusCode: 400, statusMessage: "Usuário não encontrado" });
   }
 }
 

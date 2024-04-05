@@ -8,7 +8,7 @@ class Bet {
     return bets;
   };
 
-  getById = async (params: Prisma.BetWhereUniqueInput) => {
+  get = async (params: Prisma.BetWhereUniqueInput) => {
     const bet = await prisma.bet.findUnique({ where: params });
 
     if (!bet)
@@ -17,10 +17,7 @@ class Bet {
     return bet;
   };
 
-  finishBet = async (
-    where: Prisma.BetWhereUniqueInput,
-    data: Prisma.BetUpdateInput,
-  ) => {
+  finish = async (where: Prisma.BetWhereUniqueInput, data: Prisma.BetUpdateInput) => {
     const bet = await prisma.bet.update({ where, data });
 
     if (!bet)
@@ -29,6 +26,12 @@ class Bet {
     const revenue = bet.finalAmount - bet.amount;
 
     await company.updateAmount(revenue);
+
+    return bet;
+  };
+
+  create = async (data: Prisma.BetCreateInput) => {
+    const bet = await prisma.bet.create({ data });
 
     return bet;
   };

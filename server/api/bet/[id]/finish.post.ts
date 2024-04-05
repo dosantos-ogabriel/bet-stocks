@@ -10,7 +10,7 @@ export default defineEventHandler(async (e) => {
 
   id = parseInt(id);
 
-  const data = await bet.finishBet({ id }, body);
+  const data = await bet.finish({ id }, body);
 
   return data;
 });

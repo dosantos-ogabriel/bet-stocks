@@ -3,6 +3,6 @@
 <template>
   <div>
     <div class="text-xl">Resumo</div>
-    <u-divider class="my-2" />
+    <u-divider class="my-4" />
   </div>
 </template>

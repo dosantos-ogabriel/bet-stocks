@@ -2,6 +2,8 @@
 import { type Bet } from "@prisma/client";
 
 const { bet } = defineProps<{ bet: Bet }>();
+
+const modal = ref(false);
 </script>
 
 <template>
@@ -15,7 +17,13 @@ const { bet } = defineProps<{ bet: Bet }>();
       {{ formatMoney(bet.finalAmount) }}
     </div>
     <div class="flex justify-end">
-      <u-button color="gray" label="Finalizar aposta" />
+      <u-button color="gray" label="Finalizar aposta" @click="modal = true" />
     </div>
+
+    <u-modal v-model="modal">
+      <div class="p-4">
+        <bet-finish-modal :bet />
+      </div>
+    </u-modal>
   </div>
 </template>

@@ -22,7 +22,7 @@ const modal = ref(false);
 
     <u-modal v-model="modal">
       <div class="p-4">
-        <bet-finish-modal :bet />
+        <bet-finish-modal :bet @close="modal = false" />
       </div>
     </u-modal>
   </div>

@@ -8,5 +8,9 @@ export const useBetStore = defineStore("bet", () => {
     bets.value = data;
   }
 
-  return { bets, getActiveBets };
+  async function finishBet(bet: Partial<Bet>) {
+    await $fetch(`/api/bet/${bet.id}/finish`, { method: "post", body: bet });
+  }
+
+  return { bets, getActiveBets, finishBet };
 });

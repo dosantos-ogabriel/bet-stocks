@@ -17,8 +17,9 @@ model Company {
   id        Int      @id @default(autoincrement())
   createdAt DateTime @default(now())
 
-  name   String
-  amount String
+  name       String
+  amount     String
+  BetHistory BetHistory[]
 }
 
 model User {
@@ -61,4 +62,19 @@ model Bet {
   amount      Float
   finalAmount Float
   finishedAt  DateTime?
+
+  BetHistory BetHistory?
+}
+
+model BetHistory {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+
+  deviation Float
+
+  bet   Bet @relation(fields: [betId], references: [id])
+  betId Int @unique
+
+  company   Company @relation(fields: [companyId], references: [id])
+  companyId Int
 }

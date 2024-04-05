@@ -25,7 +25,7 @@ const modal = ref(false);
     </div>
 
     <u-modal v-model="modal">
-      <bet-add-modal class="p-6" />
+      <bet-add-modal class="p-6" @close="modal = false" />
     </u-modal>
   </div>
 </template>

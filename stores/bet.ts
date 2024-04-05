@@ -1,4 +1,4 @@
-import type { Bet } from "@prisma/client";
+import type { Bet, Prisma } from "@prisma/client";
 
 export const useBetStore = defineStore("bet", () => {
   const bets = ref<Bet[]>([]);
@@ -12,5 +12,11 @@ export const useBetStore = defineStore("bet", () => {
     await $fetch(`/api/bet/${bet.id}/finish`, { method: "post", body: bet });
   }
 
-  return { bets, getActiveBets, finishBet };
+  async function createBet(body: Prisma.BetCreateInput) {
+    const bet = await $fetch(`/api/bet`, { method: "post", body });
+
+    return bet;
+  }
+
+  return { bets, getActiveBets, finishBet, createBet };
 });

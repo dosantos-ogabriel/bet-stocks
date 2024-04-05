@@ -1,4 +1,5 @@
 import { Prisma } from "@prisma/client";
+import company from "./company";
 import prisma from "./db";
 
 class Bet {
@@ -24,6 +25,10 @@ class Bet {
 
     if (!bet)
       throw createError({ statusCode: 404, statusMessage: "Recurso não encontrado" });
+
+    const revenue = bet.finalAmount - bet.amount;
+
+    await company.updateAmount(revenue);
 
     return bet;
   };

@@ -7,7 +7,7 @@ const modal = ref(false);
 </script>
 
 <template>
-  <div class="p-4 bg-green-50 dark:bg-green-900 shadow-sm rounded-sm space-y-3">
+  <u-card class="space-y-3">
     <div class="text-sm">
       Valor:
       {{ formatMoney(bet.amount) }}
@@ -25,5 +25,5 @@ const modal = ref(false);
         <bet-finish-modal :bet @close="modal = false" />
       </div>
     </u-modal>
-  </div>
+  </u-card>
 </template>

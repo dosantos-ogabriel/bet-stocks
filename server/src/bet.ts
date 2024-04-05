@@ -1,4 +1,5 @@
 import { Prisma } from "@prisma/client";
+import betHistory from "./bet-history";
 import company from "./company";
 import prisma from "./db";
 
@@ -6,6 +7,12 @@ class Bet {
   list = async (params?: Prisma.BetFindManyArgs) => {
     const bets = await prisma.bet.findMany(params);
     return bets;
+  };
+
+  create = async (data: Prisma.BetCreateInput) => {
+    const bet = await prisma.bet.create({ data });
+
+    return bet;
   };
 
   get = async (params: Prisma.BetWhereUniqueInput) => {
@@ -25,13 +32,9 @@ class Bet {
 
     const revenue = bet.finalAmount - bet.amount;
 
-    await company.updateAmount(revenue);
+    const companyData = await company.updateAmount(revenue);
 
-    return bet;
-  };
-
-  create = async (data: Prisma.BetCreateInput) => {
-    const bet = await prisma.bet.create({ data });
+    await betHistory.createFromBet(bet, companyData);
 
     return bet;
   };

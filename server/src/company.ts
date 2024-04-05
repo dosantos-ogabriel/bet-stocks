@@ -1,6 +1,15 @@
+import { Prisma } from "@prisma/client";
 import prisma from "./db";
-
 class Company {
+  async get(where: Prisma.CompanyWhereUniqueInput) {
+    const company = await prisma.company.findUnique({ where });
+
+    if (!company)
+      throw createError({ statusCode: 404, statusMessage: "Recurso não encontrado" });
+
+    return company;
+  }
+
   async updateAmount(amount: number, id: number = 1) {
     const company = await prisma.company.findUnique({ where: { id } });
 

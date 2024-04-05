@@ -15,6 +15,6 @@ const chartData = computed(() => {
     <div class="text-xl">Resumo</div>
     <u-divider class="my-4" />
 
-    {{ chartData }}
+    <home-chart :data="chartData" />
   </div>
 </template>

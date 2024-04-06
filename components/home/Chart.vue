@@ -5,16 +5,16 @@ const betHistoryStore = useBetHistoryStore();
 const { history } = storeToRefs(betHistoryStore);
 
 const labels = computed(() => [
-  "Início",
+  "06/04/2024",
   ...history.value.map((item) => formatDate(item.createdAt)),
 ]);
 
 const dataset = computed(() => [
-  0,
+  1,
   ...history.value.map((item, index) => {
     const pastDeviation = history.value
       .slice(0, index)
-      .reduce((acc, cur) => acc + cur.deviation, 0);
+      .reduce((acc, cur) => acc + cur.deviation, 1);
     return ParseFloat(item.deviation + pastDeviation);
   }),
 ]);

@@ -1,12 +1,11 @@
 import {
-  BarElement,
   CategoryScale,
   Chart,
-  Legend,
   LinearScale,
-  Title,
+  LineElement,
+  PointElement,
   Tooltip,
 } from "chart.js";
 export default defineNuxtPlugin(() => {
-  Chart.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
+  Chart.register(CategoryScale, LinearScale, PointElement, LineElement, Tooltip);
 });

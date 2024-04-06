@@ -1,16 +1,41 @@
 <script lang="ts" setup>
-import { Line } from "vue-chartjs";
+import { type ChartData } from "chart.js";
+import { Line as LineChart } from "vue-chartjs";
+const betHistoryStore = useBetHistoryStore();
+const { history } = storeToRefs(betHistoryStore);
 
-const { data } = defineProps<{ data: unknown[] }>();
+const labels = computed(() => [
+  "Início",
+  ...history.value.map((item) => formatDate(item.createdAt)),
+]);
 
-const config = {
-  type: "line",
-  data: {},
-  options: {},
-  plugins: [],
-};
+const dataset = computed(() => [
+  0,
+  ...history.value.map((item, index) => {
+    const pastDeviation = history.value
+      .slice(0, index)
+      .reduce((acc, cur) => acc + cur.deviation, 0);
+    return ParseFloat(item.deviation + pastDeviation);
+  }),
+]);
+
+const data = computed<ChartData<"line">>(() => {
+  return {
+    labels: labels.value,
+    datasets: [
+      {
+        data: dataset.value,
+        fill: false,
+        borderColor: "rgb(75, 192, 192)",
+        tension: 0.2,
+      },
+    ],
+  };
+});
 </script>
 
 <template>
-  <line :config />
+  <div>
+    <line-chart :data />
+  </div>
 </template>

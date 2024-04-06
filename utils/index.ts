@@ -1,4 +1,5 @@
-export const formatDate = (date: Date) => {
+export const formatDate = (date: Date | string) => {
+  if (typeof date == "string") date = new Date(date);
   return Intl.DateTimeFormat("pt-BR", {
     dateStyle: "short",
   }).format(date);

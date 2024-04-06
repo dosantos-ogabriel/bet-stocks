@@ -1,13 +1,8 @@
 <script lang="ts" setup>
 const betHistoryStore = useBetHistoryStore();
 const { getBetHistory } = betHistoryStore;
-const { history } = storeToRefs(betHistoryStore);
 
 onMounted(getBetHistory);
-
-const chartData = computed(() => {
-  return history.value.map((i) => i);
-});
 </script>
 
 <template>
@@ -15,6 +10,6 @@ const chartData = computed(() => {
     <div class="text-xl">Resumo</div>
     <u-divider class="my-4" />
 
-    <home-chart :data="chartData" />
+    <home-chart class="h-[50vh]" />
   </div>
 </template>

@@ -8,6 +8,7 @@ const { createBet, getActiveBets } = useBetStore();
 const form = reactive({
   amount: undefined,
   finalAmount: undefined,
+  description: undefined,
 });
 
 const schema = z.object({
@@ -17,6 +18,7 @@ const schema = z.object({
   finalAmount: z
     .number({ invalid_type_error: "Digite um valor não negativo." })
     .min(0, "Digite um valor não negativo."),
+  description: z.string().optional(),
 });
 type Schema = z.output<typeof schema>;
 
@@ -42,6 +44,9 @@ const submit = async (e: FormSubmitEvent<Schema>) => {
         placeholder="0,00"
         step="0.01"
       />
+    </u-form-group>
+    <u-form-group id="description" label="Detalhes da aposta:" name="description">
+      <u-textarea v-model="form.description" placeholder="Detalhes da aposta" />
     </u-form-group>
 
     <div class="flex justify-end">

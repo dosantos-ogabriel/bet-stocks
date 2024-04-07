@@ -7,17 +7,23 @@ const modal = ref(false);
 </script>
 
 <template>
-  <u-card class="space-y-3">
-    <div class="text-sm">
-      Valor:
-      {{ formatMoney(bet.amount) }}
-    </div>
-    <div class="text-sm">
-      Valor esperado:
-      {{ formatMoney(bet.finalAmount) }}
-    </div>
-    <div class="flex justify-end">
-      <u-button color="gray" label="Finalizar aposta" @click="modal = true" />
+  <u-card>
+    <div class="space-y-3">
+      <div v-if="bet.description" class="text-sm">
+        <div class="text-lg">Descrição:</div>
+        {{ bet.description }}
+      </div>
+      <div class="text-sm">
+        <div class="text-lg">Valor:</div>
+        {{ formatMoney(bet.amount) }}
+      </div>
+      <div class="text-sm">
+        <div class="text-lg">Valor esperado:</div>
+        {{ formatMoney(bet.finalAmount) }}
+      </div>
+      <div class="flex justify-end">
+        <u-button color="gray" label="Finalizar aposta" @click="modal = true" />
+      </div>
     </div>
 
     <u-modal v-model="modal">
